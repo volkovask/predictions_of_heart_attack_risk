@@ -3,7 +3,7 @@ from src.csvreq import CSVRequest
 from src.dataproc import DataProcessor
 from fastapi import FastAPI, HTTPException
 from src.mlmodel import MLModelHandler
-
+from settings import BEST_PIPELINE, OUTPUT_PATH
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
@@ -11,13 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 app = FastAPI()
-best_pipeline = "model/best_pipeline.joblib"
-output_path = "datasets/predictions.csv"
 
 
 # Инициализация обработчика модели
 try:
-    model_handler = MLModelHandler(best_pipeline)
+    model_handler = MLModelHandler(BEST_PIPELINE)
 except Exception as error:
     logger.critical(f"Failed to initialize model handler: {str(error)}")
     raise
@@ -37,8 +35,8 @@ async def predict_req(request: CSVRequest):
         predictions = model_handler.predict(data)
 
         # Сохраняем результат в CSV
-        predictions.to_csv(output_path, index=False)
-        logger.info(f"Save predictions to {output_path} file.")
+        predictions.to_csv(OUTPUT_PATH, index=False)
+        logger.info(f"Save predictions to {OUTPUT_PATH} file.")
 
         # Формирование ответа
         response = {

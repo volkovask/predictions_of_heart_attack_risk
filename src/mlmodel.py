@@ -2,14 +2,11 @@ import pandas as pd
 import joblib
 import logging
 from pathlib import Path
-
+from settings import ID
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
-ID = 'id'
 
 
 class MLModelHandler:
