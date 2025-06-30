@@ -40,5 +40,25 @@ https://github.com/volkovask/predictions_of_heart_attack_risk.git
  python test_api.py
 ```
 
-### Структура проекта
+### Структура проекта.
 
+```
+├── README.md
+├── datasets
+│   ├── heart_test.csv
+│   ├── heart_train.csv
+│   ├── predictions.csv
+│   └── test.csv
+├── main.py
+├── model
+│   └── best_pipeline.joblib
+├── notebook.ipynb
+├── requirements.txt
+├── settings.py
+├── src
+│   ├── csvreq.py
+│   ├── dataproc.py
+│   ├── mlmodel.py
+│   └── test.py
+├── test_api.py
+```
