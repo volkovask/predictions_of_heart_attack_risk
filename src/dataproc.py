@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import re
 from pathlib import Path
+from settings import OHE_COLUMNS, ORD_COLUMNS
 
 
 # Настройка логирования
@@ -36,6 +37,10 @@ class DataProcessor:
             # Удалим пропуски
             df.dropna(inplace=True)
             logger.info("Removing the gaps.")
+
+            # Преобразование типа поля в int.
+            DataProcessor.__convert_float_to_int(df)
+            logger.info("Converting a type fields to int.")
 
             return df
 
@@ -72,3 +77,9 @@ class DataProcessor:
         data['gender'] = (np.where(data['gender'] == 'Male', '1.0', data['gender']))
         data['gender'] = (np.where(data['gender'] == 'Female', '0.0', data['gender']))
         data['gender'] = data['gender'].astype('float64').astype('int64')
+
+    @staticmethod
+    def __convert_float_to_int(data: pd.DataFrame) -> pd.DataFrame:
+        """Преобразование типа поля в int."""
+        data[ORD_COLUMNS] = data[ORD_COLUMNS].astype('int64')
+        data[OHE_COLUMNS] = data[OHE_COLUMNS].astype('int64')

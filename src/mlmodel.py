@@ -31,7 +31,7 @@ class MLModelHandler:
             raise
 
     def predict(self, data: pd.DataFrame) -> pd.DataFrame:
-        """Безопасное выполнение предсказания"""
+        """Выполнение предсказания"""
         try:
             predictions = self.model.predict(data)
 
